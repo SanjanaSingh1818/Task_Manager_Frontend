@@ -50,9 +50,9 @@ client/
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the repository
-git clone https://github.com/your-username/task-manager-frontend.git
+git clone https:[//github.com/your-username/task-manager-frontend.git](https://github.com/SanjanaSingh1818/Task_Manager_Frontend.git)
 
-cd task-manager-frontend
+cd client
 
 ---
 
