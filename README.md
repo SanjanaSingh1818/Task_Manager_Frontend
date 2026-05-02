@@ -62,7 +62,7 @@ npm install
 ---
 
 ### 3. Create `.env` file
-VITE_API_URL=https://your-backend-url.up.railway.app
+VITE_API_URL=taskmanagerbackend-production-c491.up.railway.app
 
 ---
 
