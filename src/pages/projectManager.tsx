@@ -64,8 +64,8 @@ export default function ProjectsPage() {
   }
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Projects</h1>
           <p className="text-slate-400 mt-1">{projects.length} project{projects.length !== 1 ? 's' : ''}</p>
@@ -73,7 +73,7 @@ export default function ProjectsPage() {
         {isAdmin && (
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors"
+            className="flex w-full items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors sm:w-auto"
           >
             <Plus className="w-4 h-4" />
             New Project
@@ -94,7 +94,7 @@ export default function ProjectsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {projects.map(project => (
-            <div key={project.id} className="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col gap-4 hover:border-slate-700 transition-colors group">
+            <div key={project.id} className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-col gap-4 hover:border-slate-700 transition-colors group">
               <div className="flex items-start justify-between gap-3">
                 <div className="w-10 h-10 bg-blue-900 rounded-xl flex items-center justify-center flex-shrink-0">
                   <FolderOpen className="w-5 h-5 text-blue-400" />
@@ -114,7 +114,7 @@ export default function ProjectsPage() {
                   <p className="text-slate-400 text-sm mt-1 line-clamp-2">{project.description}</p>
                 )}
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-1.5 text-slate-500 text-xs">
                   <Calendar className="w-3.5 h-3.5" />
                   {new Date(project.created_at).toLocaleDateString()}

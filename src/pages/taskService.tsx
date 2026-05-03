@@ -62,14 +62,14 @@ export default function TasksPage() {
   }
 
   return (
-    <div className="p-8">
-      <div className="mb-8">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="mb-6 sm:mb-8">
         <h1 className="text-2xl font-bold text-white">{isAdmin ? 'All Tasks' : 'My Tasks'}</h1>
         <p className="text-slate-400 mt-1">{filtered.length} task{filtered.length !== 1 ? 's' : ''}</p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3 mb-6">
-        <div className="relative flex-1 min-w-48">
+      <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center">
+        <div className="relative w-full lg:flex-1">
           <input
             type="text"
             value={search}
@@ -78,8 +78,8 @@ export default function TasksPage() {
             className="w-full pl-4 pr-4 py-2.5 bg-slate-900 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition"
           />
         </div>
-        <div className="flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-lg p-1">
-          <Filter className="w-4 h-4 text-slate-400 ml-2" />
+        <div className="flex w-full items-center gap-2 overflow-x-auto bg-slate-900 border border-slate-800 rounded-lg p-1 lg:w-auto">
+          <Filter className="w-4 h-4 text-slate-400 ml-2 flex-shrink-0" />
           {STATUS_OPTIONS.map(opt => (
             <button
               key={opt.value}
@@ -119,7 +119,7 @@ export default function TasksPage() {
             return (
               <div
                 key={task.id}
-                className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center gap-4 hover:border-slate-700 transition-colors group"
+                className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col gap-3 hover:border-slate-700 transition-colors group sm:flex-row sm:items-center sm:gap-4"
               >
                 <StatusIcon className={`w-5 h-5 flex-shrink-0 ${task.status === 'completed' ? 'text-emerald-400' : task.status === 'in_progress' ? 'text-blue-400' : 'text-slate-500'}`} />
 
@@ -156,12 +156,12 @@ export default function TasksPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 flex-shrink-0">
+                <div className="flex w-full items-center gap-3 flex-shrink-0 sm:w-auto">
                   {canEdit ? (
                     <select
                       value={task.status}
                       onChange={e => handleStatusChange(task.id, e.target.value as TaskStatus)}
-                      className="text-xs bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-blue-500 transition cursor-pointer"
+                      className="w-full text-xs bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-blue-500 transition cursor-pointer sm:w-auto"
                     >
                       <option value="todo">To Do</option>
                       <option value="in_progress">In Progress</option>

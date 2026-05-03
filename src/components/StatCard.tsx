@@ -18,13 +18,13 @@ const colorMap = {
 export default function StatCard({ label, value, icon: Icon, color, description }: StatCardProps) {
   const c = colorMap[color];
   return (
-    <div className={`${c.bg} border ${c.border} rounded-2xl p-6 flex items-start gap-4`}>
-      <div className={`${c.icon} w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0`}>
+    <div className={`${c.bg} border ${c.border} rounded-2xl p-4 sm:p-6 flex items-start gap-3 sm:gap-4`}>
+      <div className={`${c.icon} w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center flex-shrink-0`}>
         <Icon className="w-5 h-5 text-white" />
       </div>
-      <div>
+      <div className="min-w-0">
         <p className="text-slate-400 text-sm">{label}</p>
-        <p className="text-3xl font-bold text-white mt-0.5">{value}</p>
+        <p className="text-2xl sm:text-3xl font-bold text-white mt-0.5">{value}</p>
         {description && <p className={`text-xs mt-1 ${c.text}`}>{description}</p>}
       </div>
     </div>

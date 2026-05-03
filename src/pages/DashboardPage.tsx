@@ -73,27 +73,27 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="p-8">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-xl font-bold text-white sm:text-2xl">
           Welcome back, {profile?.full_name?.split(' ')[0] || 'there'}
         </h1>
-        <p className="text-slate-400 mt-1">
+        <p className="mt-1 text-sm text-slate-400 sm:text-base">
           {isAdmin ? "Here's an overview of your team's work." : "Here's your task overview."}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+      <div className="mb-6 grid grid-cols-1 gap-3 sm:mb-8 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
         <StatCard label="Total Tasks" value={stats.total} icon={ListTodo} color="blue" description={isAdmin ? 'Across all projects' : 'Assigned to you'} />
         <StatCard label="Completed" value={stats.completed} icon={CheckCircle2} color="emerald" description="Finished tasks" />
         <StatCard label="In Progress" value={stats.in_progress} icon={Clock} color="amber" description="Currently active" />
         <StatCard label="Overdue" value={stats.overdue} icon={AlertCircle} color="red" description="Past due date" />
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl">
-          <div className="flex items-center justify-between p-6 border-b border-slate-800">
-            <h2 className="text-lg font-semibold text-white">{isAdmin ? 'Recent Tasks' : 'My Tasks'}</h2>
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2 xl:gap-6">
+        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900">
+          <div className="flex items-center justify-between gap-3 border-b border-slate-800 p-4 sm:p-6">
+            <h2 className="min-w-0 truncate text-base font-semibold text-white sm:text-lg">{isAdmin ? 'Recent Tasks' : 'My Tasks'}</h2>
             <Link to="/tasks" className="flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 transition-colors">
               View all <ArrowRight className="w-3.5 h-3.5" />
             </Link>
@@ -103,14 +103,14 @@ export default function DashboardPage() {
               <p className="p-6 text-slate-500 text-sm text-center">No tasks yet.</p>
             ) : (
               recentTasks.map(task => (
-                <div key={task.id} className="p-4 flex items-center justify-between gap-4">
+                <div key={task.id} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                   <div className="min-w-0 flex-1">
                     <p className="text-white text-sm font-medium truncate">{task.title}</p>
                     <p className="text-slate-500 text-xs mt-0.5 truncate">
-                      {task.project?.name || 'No project'} {task.due_date && `· Due ${task.due_date}`}
+                      {task.project?.name || 'No project'} {task.due_date && `- Due ${task.due_date}`}
                     </p>
                   </div>
-                  {statusBadge(task.status)}
+                  <div className="flex flex-shrink-0">{statusBadge(task.status)}</div>
                 </div>
               ))
             )}
@@ -118,9 +118,9 @@ export default function DashboardPage() {
         </div>
 
         {isAdmin && (
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl">
-            <div className="flex items-center justify-between p-6 border-b border-slate-800">
-              <h2 className="text-lg font-semibold text-white">Recent Projects</h2>
+          <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900">
+            <div className="flex items-center justify-between gap-3 border-b border-slate-800 p-4 sm:p-6">
+              <h2 className="min-w-0 truncate text-base font-semibold text-white sm:text-lg">Recent Projects</h2>
               <Link to="/projects" className="flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 transition-colors">
                 View all <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -151,7 +151,7 @@ export default function DashboardPage() {
         )}
 
         {!isAdmin && (
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 flex flex-col items-center justify-center text-center">
             <div className="w-14 h-14 bg-blue-950 rounded-2xl flex items-center justify-center mb-4">
               <CheckCircle2 className="w-7 h-7 text-blue-400" />
             </div>

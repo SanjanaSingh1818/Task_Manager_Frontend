@@ -97,7 +97,7 @@ export default function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <div className="p-8">
+      <div className="p-4 sm:p-6 lg:p-8">
         <p className="text-slate-400">Project not found.</p>
         <Link to="/projects" className="text-blue-400 hover:text-blue-300 text-sm mt-2 inline-block">Back to Projects</Link>
       </div>
@@ -111,16 +111,16 @@ export default function ProjectDetailPage() {
   };
 
   return (
-    <div className="p-8">
-      <div className="mb-8">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="mb-6 sm:mb-8">
         <Link to="/projects" className="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm mb-4 transition-colors w-fit">
           <ArrowLeft className="w-4 h-4" /> Back to Projects
         </Link>
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <h1 className="text-2xl font-bold text-white">{project.name}</h1>
             {project.description && <p className="text-slate-400 mt-1">{project.description}</p>}
-            <div className="flex items-center gap-4 mt-3 text-sm text-slate-500">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-sm text-slate-500">
               <span>{tasks.length} task{tasks.length !== 1 ? 's' : ''}</span>
               <span>{grouped.completed.length} completed</span>
               {grouped.completed.length > 0 && tasks.length > 0 && (
@@ -133,7 +133,7 @@ export default function ProjectDetailPage() {
           {isAdmin && (
             <button
               onClick={() => setShowModal(true)}
-              className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors flex-shrink-0"
+              className="flex w-full items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors flex-shrink-0 sm:w-auto"
             >
               <Plus className="w-4 h-4" /> Add Task
             </button>
@@ -243,7 +243,7 @@ export default function ProjectDetailPage() {
                 className="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition resize-none"
               />
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-1.5">Status</label>
                 <select
