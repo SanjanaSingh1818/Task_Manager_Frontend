@@ -28,22 +28,36 @@ export default function ProjectsPage() {
 
   useEffect(() => { load(); }, []);
 
-  async function handleCreate(e: FormEvent) {
-    e.preventDefault();
-    if (!name.trim()) return;
-    setSaving(true);
-    setError('');
-    try {
-      await api.projects.create(name.trim(), description.trim());
-      setName('');
-      setDescription('');
-      setShowModal(false);
-      load();
-    } catch (err: any) {
-      setError(err.message);
-      setSaving(false);
-    }
+async function handleCreate(e: FormEvent) {
+  e.preventDefault();
+
+  // ✅ prevent double click / duplicate requests
+  if (saving) return;
+
+  if (!name.trim()) return;
+
+  setSaving(true);
+  setError('');
+
+  try {
+    await api.projects.create(name.trim(), description.trim());
+
+    // ✅ reset form
+    setName('');
+    setDescription('');
+
+    // ✅ close modal
+    setShowModal(false);
+
+    // ✅ refresh projects
+    await load();
+
+  } catch (err: any) {
+    setError(err.message);
+  } finally {
+    setSaving(false); // ✅ ALWAYS RESET
   }
+}
 
   async function handleDelete(id: string) {
     if (!confirm('Delete this project and all its tasks?')) return;

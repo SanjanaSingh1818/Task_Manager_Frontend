@@ -52,21 +52,48 @@ export default function ProjectDetailPage() {
     loadUsers();
   }, []);
 
-  async function handleCreateTask(e: FormEvent) {
-    e.preventDefault();
-    if (!form.title.trim()) return;
-    setSaving(true);
-    setError('');
-    try {
-      await api.tasks.create(form.title.trim(), form.description.trim(), id!, form.assigned_to || undefined, form.due_date || undefined);
-      setForm({ title: '', description: '', due_date: '', assigned_to: '', status: 'todo' as TaskStatus });
-      setShowModal(false);
-      loadData();
-    } catch (err: any) {
-      setError(err.message);
-      setSaving(false);
-    }
+async function handleCreateTask(e: FormEvent) {
+  e.preventDefault();
+
+  // ✅ prevent double click
+  if (saving) return;
+
+  // ✅ validation
+  if (!form.title.trim()) return;
+
+  setSaving(true);
+  setError('');
+
+  try {
+    await api.tasks.create(
+      form.title.trim(),
+      form.description.trim(),
+      id!,
+      form.assigned_to || undefined,
+      form.due_date || undefined
+    );
+
+    // ✅ reset form
+    setForm({
+      title: '',
+      description: '',
+      due_date: '',
+      assigned_to: '',
+      status: 'todo' as TaskStatus
+    });
+
+    // ✅ close modal
+    setShowModal(false);
+
+    // ✅ reload data
+    await loadData();
+
+  } catch (err: any) {
+    setError(err.message);
+  } finally {
+    setSaving(false); // ✅ ALWAYS RESET (MAIN FIX)
   }
+}
 
   async function handleStatusChange(taskId: string, status: TaskStatus) {
     try {
